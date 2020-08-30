@@ -3,18 +3,15 @@ import {navigationConstants} from "./navigation.constants"
 
 export interface NavigationAction extends AnyAction {
     query?: string,
-    loading?: boolean
+    pathname?: string
 }
 
-export const navigationQueryAction = (query?: string): NavigationAction => ({
+export const navigationQueryAction = (query?: string, pathname?: string): NavigationAction => ({
     type: navigationConstants.QUERY,
-    query: query
+    query: query,
+    pathname: pathname
 })
 
-export const navigationLoadingAction = (loading?: boolean): NavigationAction => ({
-    type: navigationConstants.LOADING,
-    loading: loading
-})
 export const navigationClearAction = (): NavigationAction => ({
     type: navigationConstants.CLEAR
 })

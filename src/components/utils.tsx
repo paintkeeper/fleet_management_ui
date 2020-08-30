@@ -1,3 +1,5 @@
+import {ApplicationState} from "./index";
+
 export function supplyConvert<I, O>(supplier: () => I | null, converter: (val: I) => O, def: O): O {
     const supplied = supplier()
     return supplied ? converter(supplied) : def
@@ -10,4 +12,9 @@ export function parseJwt(jwt: string): any {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
+}
+
+export function validateToken(state: ApplicationState, onSuccess: (token: string) => void, onFailure: () => void) {
+    const auth = state.auth
+    auth.token && auth.exp && Date.now() < auth.exp ? onSuccess(auth.token) : onFailure()
 }

@@ -1,18 +1,23 @@
-import {MapStateToProps} from "react-redux";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 import {ApplicationState} from "../index";
 
-export interface EnvProps {
-    backend_uri?: string,
-    api_version?: string,
-    jwt?: string
+interface PageStateProps {
+    backend_uri?: string
 }
 
-export const pagesMapStateToProps: MapStateToProps<EnvProps, EnvProps, ApplicationState> =
-    (state, ownProps) => ({
-        backend_uri: state.env.backend_uri,
-        api_version: state.env.api_version,
-        jwt: state.auth.jwt
-    })
+interface PageDispatchProps {
+}
+
+export type PageProps = PageStateProps & PageDispatchProps
+
+const pagesDispatchToProps = (dispatch: Dispatch): PageDispatchProps => ({})
+
+const pagesStateToProps = (state: ApplicationState, ownProps: PageProps): PageStateProps => ({
+    backend_uri: state.env.backend_uri
+})
+
+export const connector = connect<PageStateProps, PageDispatchProps, PageProps, ApplicationState>(pagesStateToProps, pagesDispatchToProps)
 
 export * from "./notfound.page"
 export * from "./home.page"

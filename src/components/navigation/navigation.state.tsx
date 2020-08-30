@@ -1,25 +1,18 @@
 export interface NavigationState {
-    loading: boolean,
-    query?: string
+    query?: string,
+    pathname?: string
 }
 
 export const initialState: NavigationState = {
-    loading: false,
-    query: undefined
+    query: undefined,
+    pathname: undefined
 }
 
-export const navigationQueryState = (state: NavigationState, query?: string): NavigationState => {
+export const navigationQueryState = (state: NavigationState, query?: string, pathname?: string): NavigationState => {
     return {
         ...state,
-        loading: true,
-        query: query
-    }
-}
-
-export const navigationLoadingState = (state: NavigationState, loading?: boolean): NavigationState => {
-    return {
-        ...state,
-        loading: !!loading
+        query: query,
+        pathname: pathname
     }
 }
 

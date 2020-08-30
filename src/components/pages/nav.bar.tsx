@@ -11,7 +11,6 @@ import {Link} from "react-router-dom"
 import {bindActionCreators, Dispatch} from "redux"
 
 interface NavProps extends ContainerProps {
-    loading?: boolean,
     user?: any,
     logout?: () => void
 }
@@ -102,8 +101,7 @@ const Navbar: React.FC<NavProps> = ({
 }
 
 const mapStateToProps: MapStateToProps<NavProps, NavProps, ApplicationState> = ({auth, navigation}: ApplicationState) => ({
-    user: auth.user,
-    loading: navigation.loading
+    user: auth.user
 })
 
 const mapDispatchProps: MapDispatchToProps<NavProps, AuthAction> = (dispatch: Dispatch<AuthAction>) =>

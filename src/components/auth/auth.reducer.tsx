@@ -1,9 +1,10 @@
 import {authConstants} from "./auth.constants"
 import {Reducer} from "redux"
 import {
-    authAuthenticatedState, authJwtState,
+    authAuthenticatedState,
+    authExpiryState,
     authLogoutState,
-    AuthState,
+    AuthState, authTokenState,
     initialState
 } from "./auth.state"
 import {AuthAction} from "./auth.actions"
@@ -16,8 +17,11 @@ export const authReducer: Reducer<AuthState, AuthAction> = (state = initialState
         authConstants.LOGOUT:
             return authLogoutState()
         case
-            authConstants.JWT:
-            return authJwtState(state, action.jwt)
+        authConstants.TOKEN:
+            return authTokenState(state, action.token)
+        case
+        authConstants.EXP:
+            return authExpiryState(state, action.exp)
         default:
             return state
     }

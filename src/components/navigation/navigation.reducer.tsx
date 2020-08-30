@@ -4,7 +4,6 @@ import {navigationConstants} from "./navigation.constants"
 import {
     initialState,
     navigationClear,
-    navigationLoadingState,
     navigationQueryState,
     NavigationState
 } from "./navigation.state"
@@ -12,9 +11,7 @@ import {
 export const navigationReducer: Reducer<NavigationState, NavigationAction> = (state = initialState, action) => {
     switch (action.type) {
         case navigationConstants.QUERY:
-            return navigationQueryState(state, action.query)
-        case navigationConstants.LOADING:
-            return navigationLoadingState(state, action.loading)
+            return navigationQueryState(state, action.query, action.pathname)
         case navigationConstants.CLEAR:
             return navigationClear()
         default:
